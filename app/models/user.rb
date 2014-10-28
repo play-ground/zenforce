@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def rank
-    Rank.where("min_points < #{points}").order('min_points ASC').last.name
+    Rank.where("min_points <= #{points}").order('min_points ASC').last.name
   end
 
 end
