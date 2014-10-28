@@ -65,5 +65,10 @@ namespace :gioco do
     File.open("#{Rails.root}/db/gioco/db.rb", 'a') { |f| f.write "require \"\#\{Rails.root\}#{file_path}\"
 " }
   end
-  
+
+  task :sync_database => :environment do
+    content = File.read("#{Rails.root}/db/gioco/db.rb")
+    eval content
+  end
+
 end
