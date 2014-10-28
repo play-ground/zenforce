@@ -7,6 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require "#{Rails.root}/db/gioco/db.rb"
 
-User.create!(name: 'Fábio Neves', email: 'fneves@zendesk.com', username: 'fneves' )
-Rank.create!(name:'',  min_points: '0')
+Rank.create!(name:'zengling',  min_points: '0')
+Rank.create!(name:'zendawan',  min_points: '25')
+Rank.create!(name:'zendi',  min_points: '50')
+Rank.create!(name:'zendi master',  min_points: '70')
 
