@@ -42,6 +42,7 @@
         external_id: this.currentUser().id(),
       };
       console.log("Loading app: " + this.ticket());
+      this.showSpinner(true);
 
       this.ajax('fetchUserDetails', requestParams).done(function(details) {
         console.log("Got the user details: " + JSON.stringify(details) + "... getting leaderboard!");
@@ -51,9 +52,12 @@
             console.log("Got the leaderboard: " + JSON.stringify(leaderData));
             details.leaderboard = leaderData.leaderboard;
             this.switchTo('zen-force', details);
-          }).error(function () {
+          }).fail(function () {
             console.log("Failed getting leaderboard!");
             this.switchTo('zen-force', details);
+          }).always(function() {
+            console.log("Stopping spinner");
+            this.showSpinner(false);
           });
       });
     },
@@ -74,6 +78,15 @@
       }
     },
 
+    showSpinner: function(show) {
+      if (show) {
+        this.$('.main').addClass('loading');
+        this.$('.loading_spinner').css('display', 'block');
+      } else {
+        this.$('.main').removeClass('loading');
+        this.$('.loading_spinner').css('display', 'none');
+      }
+    },
   };
 
 }());
