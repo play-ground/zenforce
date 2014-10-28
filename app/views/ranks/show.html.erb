@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rank.name %>
+</p>
+
+<p>
+  <strong>Min points:</strong>
+  <%= @rank.min_points %>
+</p>
+
+<p>
+  <strong>Logo:</strong>
+  <%= @rank.logo %>
+</p>
+
+<p>
+  <strong>Sort order:</strong>
+  <%= @rank.sort_order %>
+</p>
+
+<%= link_to 'Edit', edit_rank_path(@rank) %> |
+<%= link_to 'Back', ranks_path %>
