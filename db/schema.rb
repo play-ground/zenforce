@@ -31,18 +31,17 @@ ActiveRecord::Schema.define(version: 20141028143204) do
   create_table "ranks", force: true do |t|
     t.string   "name"
     t.integer  "min_points"
-    t.integer  "sort_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "username"
     t.string   "email"
+    t.string   "external_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "points"
+    t.integer  "points",      default: 0
   end
 
 end

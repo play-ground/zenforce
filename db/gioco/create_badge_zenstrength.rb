@@ -1,5 +1,5 @@
 badge = Badge.create({ 
-                      :name => 'zenstrenght', 
+                      :name => 'zenstrength',
                       :points => '50',
                       
                       :default => 'false'
