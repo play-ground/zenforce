@@ -1,0 +1,17 @@
+<%= form_for(@zencontroller) do |f| %>
+  <% if @zencontroller.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@zencontroller.errors.count, "error") %> prohibited this zencontroller from being saved:</h2>
+
+      <ul>
+      <% @zencontroller.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

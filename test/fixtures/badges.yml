@@ -2,8 +2,10 @@
 
 one:
   name: MyString
+  points: 1
   default: false
 
 two:
   name: MyString
+  points: 1
   default: false

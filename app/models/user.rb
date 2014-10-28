@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-has_many :points  
 has_many :badges , :through => :levels 
 has_many :levels  
 
@@ -43,4 +42,11 @@ def next_badge?(kind_id = false)
                       }
   end
 end
+
+
+
+  def total_points
+    User.points.inject(0) { |result, item| result + item.value}
+  end
+
 end

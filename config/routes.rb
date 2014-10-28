@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     member do
       get 'details'
       get 'points'
-      post 'points'
+      post 'allocate_points'
     end
   end
 

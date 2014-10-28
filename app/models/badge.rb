@@ -1,5 +1,4 @@
 class Badge < ActiveRecord::Base
-belongs_to :kind  
 has_many :users , :through => :levels 
 has_many :levels  , :dependent => :destroy
 validates :name, :presence => true

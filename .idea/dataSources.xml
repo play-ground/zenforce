@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1169487767">
+  <component name="DataSourceManagerImpl" format="xml" hash="1719362195">
     <data-source source="LOCAL" name="Rails zenforce: development" uuid="4aa8d0a8-2f3f-4dd6-968e-d76ba62ea073">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails zenforce: test" uuid="e979d02d-75f9-4be1-adf6-290a13443cc8">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/test.sqlite3</jdbc-url>
       <libraries />
     </data-source>
   </component>
