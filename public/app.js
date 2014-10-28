@@ -21,10 +21,10 @@
       },
       addUserPoints: function (args) {
         return {
-          url: 'https://stormy-crag-5102.herokuapp.com/users/' + args.id + '/details.json',
+          url: 'https://stormy-crag-5102.herokuapp.com/users/' + args.id + '/allocate_points.json',
           contentType: 'application/json',
           data: args,
-          type: 'GET'
+          type: 'POST'
         }
       },
     },
@@ -54,18 +54,16 @@
       });
     },
 
-    saveHookHandler: function(data) {
-      console.log("Saved a ticket: " + this.ticket().id());
-      console.log("status " + this.ticket().status());
-      console.log("priority " + this.ticket().priority());
-      console.log("by " + this.currentUser().id() + "/" + this.currentUser().email());
+    saveHookHandler: function() {
       if (this.ticket().status() == "solved") {
         requestParams.name = this.currentUser().name();
         requestParams.email = this.currentUser().email();
         requestParams.id = this.currentUser().id();
         requestParams.external_id = this.currentUser().id();
         console.log("Send ticket solving to backend: " + JSON.stringify(requestParams));
-        this.ajax('fetchUserDetails', requestParams);
+        this.ajax('addUserPoints', requestParams).done(function () {
+          this.showLeaderboard();
+        });
       }
     },
 
