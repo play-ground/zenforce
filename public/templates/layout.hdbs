@@ -1,10 +1,10 @@
 <header>
-  <span class="logo"/>
-  <h3>{{setting "name"}}</h3>
+  <div id='badges'>
+    <img class="zenbadge img-rounded" src="http://localhost:3000/assets/saber.jpg" />
+    <img class="zenbadge img-rounded" src="http://localhost:3000/assets/saber.jpg" />
+  </div>
+  <h2>Zenling</h2>
 </header>
 <section data-main/>
 <footer>
-  <a href="mailto:{{author.email}}">
-    {{author.name}}
-  </a>
 </footer>
