@@ -2,6 +2,13 @@
 
   return {
     name: "hello",
+    priorityMap: {
+      '-': 2,
+      'low': 1,
+      'normal': 2,
+      'high': 3,
+      'urgent': 5
+    },
 
     requests: {
       fetchUserDetails: function (args) {
@@ -10,14 +17,14 @@
           dataType: 'json',
           data: args,
           type: 'GET'
-        }
+        };
       },
       fetchLeaderboard: function () {
         return {
           url: 'https://stormy-crag-5102.herokuapp.com/leaderboard.json',
           dataType: 'json',
           type: 'GET'
-        }
+        };
       },
       addUserPoints: function (args) {
         return {
@@ -25,7 +32,7 @@
           dataType: 'json',
           data: args,
           type: 'POST'
-        }
+        };
       },
     },
 
@@ -41,8 +48,8 @@
         id:    this.currentUser().id(),
         external_id: this.currentUser().id(),
       };
-      console.log("Loading app: " + this.ticket());
-      this.showSpinner(true);
+      console.log("Loading showLeaderboard");
+      this.switchTo('loading_screen');
 
       this.ajax('fetchUserDetails', requestParams).done(function(details) {
         console.log("Got the user details: " + JSON.stringify(details) + "... getting leaderboard!");
@@ -56,8 +63,6 @@
             console.log("Failed getting leaderboard!");
             this.switchTo('zen-force', details);
           }).always(function() {
-            console.log("Stopping spinner");
-            this.showSpinner(false);
           });
       });
     },
@@ -69,22 +74,15 @@
           email: this.currentUser().email(),
           id:    this.currentUser().id(),
           external_id: this.currentUser().id(),
-          points: this.ticket().priority()
+          points: this.priorityMap[this.ticket().priority()]
         };
         console.log("Send ticket solving to backend: " + JSON.stringify(requestParams));
         this.ajax('addUserPoints', requestParams).done(function () {
-          this.showLeaderboard();
+          if (this.ticket() != undefined) {
+            services.notify("Updated Zenforce Points!", 'notice', 2 * 1000);
+            this.showLeaderboard();
+          }
         });
-      }
-    },
-
-    showSpinner: function(show) {
-      if (show) {
-        this.$('.main').addClass('loading');
-        this.$('.loading_spinner').css('display', 'block');
-      } else {
-        this.$('.main').removeClass('loading');
-        this.$('.loading_spinner').css('display', 'none');
       }
     },
   };
