@@ -3,14 +3,28 @@
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-.zenbadge {
-    height:30px;
-}
 
 #badges {
   float: right;
 }
 
+/*header div {*/
+    /*font: ProximaNova-bold;*/
+    /*size: 20px;*/
+    /*color: #FFFFFF;*/
+    /*background-image: url('http://localhost:3000/assets/zoombg.png');*/
+/*}*/
+
+/*table.leaderboard {*/
+    /*font: ProximaNova-Regular;*/
+    /*size: 15px;*/
+    /*color: #000000;*/
+    /*opacity: 50%;*/
+/*}*/
+
+/*table td img.zenbadge {*/
+    /*height:30px;*/
+/*}*/
 
 
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */

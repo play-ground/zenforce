@@ -1,19 +1,21 @@
 <header>
-  <div id='badges'>
-    <img class="zenbadge img-rounded" src="http://localhost:3000/assets/saber.jpg" />
-    <img class="zenbadge img-rounded" src="http://localhost:3000/assets/saber.jpg" />
+  <div>
+    <div id='badges'>
+      <img class="zenbadge img-rounded" src="http://localhost:3000/assets/badge_red.png" />
+      <img class="zenbadge img-rounded" src="http://localhost:3000/assets/badge_death.png" />
+    </div>
+    <h2>{{rank}}</h2>
   </div>
-  <h2>{{rank}}</h2>
 </header>
 <table class="table">
   <tr>
     <th></th>
     <th>Rank</th>
     <th>Name</th>
-    <th>Level</th>
+    <th>Points</th>
   </tr>
   {{#each leaderboard}}
-  <tr>
+  <tr class="{{highlight}}">
     <td><img src="http://localhost:3000/assets/{{icon}}_light.png" style="height: 30px;" /></td>
     <td>{{rank}}</td>
     <td>{{name}}</td>

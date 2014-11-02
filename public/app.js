@@ -1,6 +1,7 @@
 (function() {
 
   return {
+    backendUrl: "https://zenforce.herokuapp.com/",
     priorityMap: {
       '-': 2,
       'low': 1,
@@ -9,7 +10,7 @@
       'urgent': 5
     },
     levels: {
-      zenling: {
+      zengling: {
         name: "Zen-ling",
         icon: "vader"
       },
@@ -30,7 +31,7 @@
     requests: {
       fetchUserDetails: function (args) {
         return {
-          url: 'https://stormy-crag-5102.herokuapp.com/users/' + args.id + '/details.json',
+          url: this.backendUrl + 'users/' + args.id + '/details.json',
           dataType: 'json',
           data: args,
           type: 'GET'
@@ -38,14 +39,14 @@
       },
       fetchLeaderboard: function () {
         return {
-          url: 'https://stormy-crag-5102.herokuapp.com/leaderboard.json',
+          url: this.backendUrl + 'leaderboard.json',
           dataType: 'json',
           type: 'GET'
         };
       },
       addUserPoints: function (args) {
         return {
-          url: 'https://stormy-crag-5102.herokuapp.com/users/' + args.id + '/allocate_points.json',
+          url: this.backendUrl + 'users/' + args.id + '/allocate_points.json',
           dataType: 'json',
           data: args,
           type: 'POST'
@@ -74,6 +75,9 @@
         console.log("Got the user details: " + JSON.stringify(details) + "... getting leaderboard!");
 
         finalData = details;
+        // Fix the Rank name
+        finalData.rank = this.levels[finalData.rank].name;
+
         this.ajax('fetchLeaderboard')
           .done(function(leaderData) {
             console.log("Got the leaderboard: " + JSON.stringify(leaderData));
@@ -82,7 +86,10 @@
             // Update the leaderboard with rankings from points
             for (i = 0; i < finalData.leaderboard.length; i++) {
               finalData.leaderboard[i].rank = "#" + (i+1);
-              finalData.leaderboard[i].icon = this.levels["zenling"].icon;
+              finalData.leaderboard[i].icon = this.levels["zengling"].icon;
+              if (finalData.user.id == finalData.leaderboard[i].id) {
+                finalData.leaderboard[i].highlight = "warning";
+              }
             }
           }).fail(function () {
             console.log("Failed getting leaderboard!");
