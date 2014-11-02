@@ -6,12 +6,18 @@
   <h2>{{rank}}</h2>
 </header>
 <table class="table">
-<TR><TH>Rank</TH><TH>Name</TH><TH>Level</TH></TR>
-{{#each leaderboard}}
-  <TR>
-    <TD>1</TD>
-    <TD>{{name}}</TD>
-    <TD>{{points}}</TD>
-  </TR>
-{{/each}}
+  <tr>
+    <th></th>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Level</th>
+  </tr>
+  {{#each leaderboard}}
+  <tr>
+    <td><img src="http://localhost:3000/assets/{{icon}}_light.png" style="height: 30px;" /></td>
+    <td>{{rank}}</td>
+    <td>{{name}}</td>
+    <td>{{points}}</td>
+  </tr>
+  {{/each}}
 </table>

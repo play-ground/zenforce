@@ -1,13 +1,30 @@
 (function() {
 
   return {
-    name: "hello",
     priorityMap: {
       '-': 2,
       'low': 1,
       'normal': 2,
       'high': 3,
       'urgent': 5
+    },
+    levels: {
+      zenling: {
+        name: "Zen-ling",
+        icon: "vader"
+      },
+      zendawan: {
+        name: "Zen-dawan",
+        icon: "stormtrooper"
+      },
+      zendi:{
+        name: "Zen Knight",
+        icon: "luke"
+      },
+      zenmaster: {
+        name: "Zen Master",
+        icon: "ben"
+      }
     },
 
     requests: {
@@ -43,27 +60,39 @@
 
     showLeaderboard: function() {
       var requestParams = {
-        name:  this.currentUser().name(),
-        email: this.currentUser().email(),
-        id:    this.currentUser().id(),
-        external_id: this.currentUser().id(),
-      };
+                            name:  this.currentUser().name(),
+                            email: this.currentUser().email(),
+                            id:    this.currentUser().id(),
+                            external_id: this.currentUser().id(),
+                          },
+          finalData = undefined;
+
       console.log("Loading showLeaderboard");
       this.switchTo('loading_screen');
 
       this.ajax('fetchUserDetails', requestParams).done(function(details) {
         console.log("Got the user details: " + JSON.stringify(details) + "... getting leaderboard!");
 
+        finalData = details;
         this.ajax('fetchLeaderboard')
           .done(function(leaderData) {
             console.log("Got the leaderboard: " + JSON.stringify(leaderData));
-            details.leaderboard = leaderData.leaderboard;
-            this.switchTo('zen-force', details);
+            finalData.leaderboard = leaderData.leaderboard;
+
+            // Update the leaderboard with rankings from points
+            for (i = 0; i < finalData.leaderboard.length; i++) {
+              finalData.leaderboard[i].rank = "#" + (i+1);
+              finalData.leaderboard[i].icon = this.levels["zenling"].icon;
+            }
           }).fail(function () {
             console.log("Failed getting leaderboard!");
-            this.switchTo('zen-force', details);
           }).always(function() {
+            this.switchTo('zen-force', finalData);
           });
+      }).fail(function () {
+        services.notify("Failed to update Zenforce!", 'error', 2 * 1000);
+      }).always(function() {
+        this.switchTo('zen-force', finalData);
       });
     },
 
